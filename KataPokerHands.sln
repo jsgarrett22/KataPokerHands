@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32819.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KataPokerHands", "KataPokerHands\KataPokerHands.csproj", "{D9785AE7-6874-4098-AD84-8402658172E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9785AE7-6874-4098-AD84-8402658172E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9785AE7-6874-4098-AD84-8402658172E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9785AE7-6874-4098-AD84-8402658172E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9785AE7-6874-4098-AD84-8402658172E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {64C17107-DD01-4921-AB47-C14F86D7A210}
+	EndGlobalSection
+EndGlobal
