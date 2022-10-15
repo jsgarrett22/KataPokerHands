@@ -65,11 +65,15 @@ public class Player
 
     public bool HasAPair()
     {
+		// Check every card in the hand and compare if they have equal value.
+		// If we find at least 2 matches, then we have a pair and we can add
+		// to our matches. If matches only two matches were found, that'll
+		// give us a count of 2, which we will set our WinningCard to and return true
 		List<Card> matches = new List<Card>();
 		for (int i = 0; i < this.Cards.Count; i++)
 		{
 			int value = this.Cards[i].Value;
-			if (this.Cards.FindAll(card => card.Value.Equals(value)).Count == 2)
+			if (this.Cards.FindAll(x => x.Value.Equals(value)).Count == 2)
 			{
 				matches.Add(this.Cards[i]);
 			}
@@ -78,13 +82,16 @@ public class Player
 		{
 			WinningCard = matches[0];
 			return true;
-		} 
-		else
+		} else
 		{
             return false;
         }
     }
 
+	// This is the method we will run on a player to determine the WinningCard given for the player
+	// and what kind of hand the player has given the cards. If it falls all the way down to the bottom,
+	// then the player's highest card is the winning card and we need to order the cards by their value,
+	// least to greatest and grab the highest card in the collection.
 	public string Hand()
 	{
 		if (HasFullHouse()) return "full house";
@@ -96,6 +103,31 @@ public class Player
 		if (HasAPair()) return "a pair";
 		Cards.OrderBy(card => card.Value).ToList();
 		WinningCard = Cards[Cards.Count - 1];
-		return "high card";
+		return $"high card: {DetermineHighCard(WinningCard)}";
+	}
+
+	
+	private string DetermineHighCard(Card card)
+	{
+		int value = card.Value;
+		if (value == 14)
+		{
+			return "Ace";
+		} else if (value == 13)
+		{
+			return "King";
+		} else if (value == 12)
+		{
+			return "Queen";
+		} else if (value == 11)
+		{
+			return "Jack";
+		} else if (value == 10)
+		{
+			return "10";
+		} else
+		{
+			return value.ToString();
+		}
 	}
 }

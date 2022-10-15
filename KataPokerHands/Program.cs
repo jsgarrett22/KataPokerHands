@@ -20,9 +20,9 @@ namespace KataPokerHands
                 "Black: 2H 3D 5S 9C KD  White: 2D 3H 5C 9S KH"
             };
 
-            InputController inputController = new InputController(sampleInputs[0]);
+            InputController inputController = new InputController(sampleInputs[3]);
             Game game = new Game(inputController);
-
+            Console.WriteLine(game.Players[0].Hand());
             // GET PLAYER NAMES
             //Console.WriteLine($"Total players {inputController.PlayerNames.Count}: {inputController.PlayerNames[0]}, {inputController.PlayerNames[1]}");
             // GET CARD COUNT
@@ -30,15 +30,6 @@ namespace KataPokerHands
             //game.DisplayPlayers();
             //game.Players.ForEach(p => p.DisplayHand());
             //game.DisplayWinner();
-
-            foreach (var player in game.Players)
-            {
-                Console.WriteLine(player.Name);
-                foreach (var card in player.Cards)
-                {
-                    Console.Write(card.ToString() + " ");
-                }
-            }
             // END
             Console.ReadLine();
         }
