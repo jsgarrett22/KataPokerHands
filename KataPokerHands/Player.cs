@@ -55,10 +55,21 @@ public class Player
 
     public bool HasThreeOfAKind()
     {
-        return false;
+		List<Card> threes = new List<Card>();
+		for (int i = 0; i < this.Cards.Count; i++)
+		{
+			int currentValue = this.Cards[i].Value;
+			threes = this.Cards.FindAll(card => card.Value.Equals(currentValue));
+            if (threes.Count == 3)
+            {
+                WinningCard = threes[0];
+                return true;
+            }
+        }
+		return false;
     }
 
-	// Same as HasAPair but with a count of 4
+	// Same as HasAPair but with a count of 4, and orders the pairs in descending order
     public bool HasTwoPair()
     {
         List<Card> pairs = new List<Card>();
