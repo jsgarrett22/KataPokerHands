@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Threading;
 
 public class Player
 {
@@ -67,8 +65,21 @@ public class Player
 	// Hands which are both flushes are ranked using the rules for High Card.
     public bool HasFlush()
 	{
-		return false;
-	}
+		List<Card> cards = new List<Card>();
+		cards = this.Cards.OrderBy(card => card.Value).ToList();
+        for (int i = 0; i < this.Cards.Count - 1; i++)
+        {
+            Card currentCard = cards[i];
+            Card nextCard = cards[i + 1];
+            if (currentCard.Suit != nextCard.Suit)
+            {
+                return false;       // a single false case ensures the user doesn't have a flush
+            }
+        }
+        cards = this.Cards.OrderByDescending(card => card.Value).ToList();
+        WinningCard = cards[0];
+        return true;
+    }
 
     // Straight: Hand contains 5 cards with consecutive values.
 	// Hands which both contain a straight are ranked by their highest card.
@@ -82,7 +93,7 @@ public class Player
             Card nextCard = cards[i + 1];
             if (currentCard.Value + 1 != nextCard.Value)
             {
-                return false;       // a single false case ensures the user doesn't have a flush
+                return false;       // a single false case ensures the user doesn't have a straight
             }
         }
         cards = this.Cards.OrderByDescending(card => card.Value).ToList();
