@@ -20,11 +20,12 @@ namespace KataPokerHands
                 "Black: 2H 3D 5S 9C KD  White: 2D 3H 5C 9S KH",
                 "Black: 2H 2D 5S 9C KD  White: 3D 3H 4C 4S KH",     // Pair and Two Pair
                 "Black: 2H 2D 2S 9C KD  White: 3D 3H 3C 3S KH",     // Three and Four of a Kind
+                "Black: 2H 3D 4S 5C 6D  White: 3D 3H 3C 3S KH"      // Straight and Flush
             };
 
-            InputController inputController = new InputController(sampleInputs[0]);
+            InputController inputController = new InputController(sampleInputs[6]);
             Game game = new Game(inputController);
-            Console.WriteLine(game.Players[1].Hand());
+            Console.WriteLine(game.Players[0].Hand());
             // GET PLAYER NAMES
             //Console.WriteLine($"Total players {inputController.PlayerNames.Count}: {inputController.PlayerNames[0]}, {inputController.PlayerNames[1]}");
             // GET CARD COUNT

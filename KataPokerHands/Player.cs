@@ -11,6 +11,7 @@ public class Player
 	{
 		this.Name = name;
 		Cards = new List<Card>();
+		WinningCard = null;
 	}
 
 	public void AddCard(Card card)
@@ -28,24 +29,9 @@ public class Player
 		Console.WriteLine();
 	}
 
-    public bool HasFullHouse()
-    {
-        return false;
-    }
-
-    public bool HasFlush()
-	{
-		return false;
-	}
-
-	public bool HasStraight()
-	{
-		return false;
-	}
-
     public bool HasStraightFlush()
     {
-        return false;
+		return false;
     }
 
     public bool HasFourOfAkind()
@@ -62,6 +48,34 @@ public class Player
             }
         }
         return false;
+    }
+
+    public bool HasFullHouse()
+    {
+		return false;
+    }
+
+    public bool HasFlush()
+	{
+		return false;
+	}
+
+	public bool HasStraight()
+	{
+        List<Card> cards = new List<Card>();
+        cards = this.Cards.OrderBy(card => card.Value).ToList();
+        for (int i = 0; i < this.Cards.Count - 1; i++)
+        {
+            Card currentCard = cards[i];
+            Card nextCard = cards[i + 1];
+            if (currentCard.Value + 1 != nextCard.Value)
+            {
+                return false;       // a single false case ensures the user doesn't have a flush
+            }
+        }
+        cards = this.Cards.OrderByDescending(card => card.Value).ToList();
+        WinningCard = cards[0];
+        return true;
     }
 
     public bool HasThreeOfAKind()
