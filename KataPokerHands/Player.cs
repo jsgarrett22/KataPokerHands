@@ -58,9 +58,30 @@ public class Player
         return false;
     }
 
+	// Same as HasAPair but with a count of 4
     public bool HasTwoPair()
     {
-        return false;
+        List<Card> pairs = new List<Card>();
+        List<Card> tmp = new List<Card>();
+        for (int i = 0; i < this.Cards.Count; i++)
+        {
+            int currentValue = this.Cards[i].Value;
+            tmp = this.Cards.FindAll(card => card.Value.Equals(currentValue));
+            if (tmp.Count == 2)
+            {
+                pairs.Add(this.Cards[i]);
+            }
+        }
+        if (pairs.Count == 4)
+        {
+			pairs = pairs.OrderByDescending(card => card.Value).ToList();
+            WinningCard = pairs[0];
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool HasAPair()
@@ -69,23 +90,25 @@ public class Player
 		// If we find at least 2 matches, then we have a pair and we can add
 		// to our matches. If matches only two matches were found, that'll
 		// give us a count of 2, which we will set our WinningCard to and return true
-		List<Card> matches = new List<Card>();
+		List<Card> pairs = new List<Card>();
+		List<Card> tmp = new List<Card>();
 		for (int i = 0; i < this.Cards.Count; i++)
 		{
-			int value = this.Cards[i].Value;
-			if (this.Cards.FindAll(x => x.Value.Equals(value)).Count == 2)
+			int currentValue = this.Cards[i].Value;
+			tmp = this.Cards.FindAll(card => card.Value.Equals(currentValue));
+			if (tmp.Count == 2)
 			{
-				matches.Add(this.Cards[i]);
+				pairs.Add(this.Cards[i]);
 			}
 		}
-		if (matches.Count == 2)
+		if (pairs.Count == 2)
 		{
-			WinningCard = matches[0];
+			WinningCard = pairs[0];
 			return true;
 		} else
 		{
-            return false;
-        }
+			return false;
+		}
     }
 
 	// This is the method we will run on a player to determine the WinningCard given for the player
@@ -94,16 +117,33 @@ public class Player
 	// least to greatest and grab the highest card in the collection.
 	public string Hand()
 	{
-		if (HasFullHouse()) return "full house";
-		if (HasFlush()) return "flush";
-		if (HasStraight()) return "straight";
-		if (HasFourOfAkind()) return "four of a kind";
-		if (HasThreeOfAKind()) return "three of a kind";
-		if (HasTwoPair()) return "two pair";
-		if (HasAPair()) return "a pair";
-		Cards.OrderBy(card => card.Value).ToList();
-		WinningCard = Cards[Cards.Count - 1];
-		return $"high card: {DetermineHighCard(WinningCard)}";
+		if (HasFullHouse())
+		{
+            return "full house";
+        } else if (HasFlush())
+		{
+			return "flush";
+		} else if (HasStraight())
+		{
+			return "straight";
+		} else if (HasFourOfAkind())
+		{
+			return "four of a kind";
+        } else if (HasThreeOfAKind())
+		{
+            return "three of a kind";
+        } else if (HasTwoPair())
+		{
+			return "two pair";
+		} else if (HasAPair())
+		{
+			return "a pair";
+		} else
+		{
+            this.Cards = Cards.OrderBy(card => card.Value).ToList();
+            WinningCard = Cards[Cards.Count - 1];
+            return $"high card: {DetermineHighCard(WinningCard)}";
+        }
 	}
 
 	
