@@ -162,8 +162,8 @@ public class Player
 			return "a pair";
 		} else
 		{
-            this.Cards = Cards.OrderBy(card => card.Value).ToList();
-            WinningCard = Cards[Cards.Count - 1];
+            this.Cards = Cards.OrderByDescending(card => card.Value).ToList();
+            WinningCard = Cards[0];
             return $"high card: {DetermineHighCard(WinningCard)}";
         }
 	}
