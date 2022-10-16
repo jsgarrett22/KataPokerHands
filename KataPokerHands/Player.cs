@@ -50,6 +50,17 @@ public class Player
 
     public bool HasFourOfAkind()
     {
+        List<Card> fours = new List<Card>();
+        for (int i = 0; i < this.Cards.Count; i++)
+        {
+            int currentValue = this.Cards[i].Value;
+            fours = this.Cards.FindAll(card => card.Value.Equals(currentValue));
+            if (fours.Count == 4)
+            {
+                WinningCard = fours[0];
+                return true;
+            }
+        }
         return false;
     }
 

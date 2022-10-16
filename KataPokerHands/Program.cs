@@ -22,7 +22,7 @@ namespace KataPokerHands
                 "Black: 2H 2D 2S 9C KD  White: 3D 3H 3C 3S KH",     // Three and Four of a Kind
             };
 
-            InputController inputController = new InputController(sampleInputs[4]);
+            InputController inputController = new InputController(sampleInputs[5]);
             Game game = new Game(inputController);
             Console.WriteLine(game.Players[1].Hand());
             // GET PLAYER NAMES
