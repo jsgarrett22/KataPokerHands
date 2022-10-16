@@ -33,7 +33,7 @@ public class Player
 	// Ranked by the highest card in the hand.
     public bool HasStraightFlush()
     {
-		return false;
+		return (HasStraight() && HasFlush());
     }
 
     // Four of a kind: 4 cards with the same value.
@@ -58,7 +58,7 @@ public class Player
 	// Ranked by the value of the 3 cards.
     public bool HasFullHouse()
     {
-		return false;
+		return (HasThreeOfAKind() && HasAPair());
     }
 
     // Flush: Hand contains 5 cards of the same suit.
@@ -188,18 +188,21 @@ public class Player
     // then the player's highest card is the winning card.
     public string Hand()
 	{
-		if (HasFullHouse())
+		if (HasStraightFlush())
 		{
-            return "full house";
-        } else if (HasFlush())
+			return "straight flush";
+		} else if (HasFourOfAkind())
+		{
+            return "four of a kind";
+        } else if (HasFullHouse())
+		{
+			return "full house";
+		} else if (HasFlush())
 		{
 			return "flush";
 		} else if (HasStraight())
 		{
 			return "straight";
-		} else if (HasFourOfAkind())
-		{
-			return "four of a kind";
         } else if (HasThreeOfAKind())
 		{
             return "three of a kind";
