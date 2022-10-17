@@ -216,7 +216,7 @@ public class Player
 		{
             this.Cards = Cards.OrderByDescending(card => card.Value).ToList();
             WinningCard = Cards[0];
-            return $"high card: {DetermineHighCard(WinningCard)}";
+            return $"high card";
         }
 	}
 

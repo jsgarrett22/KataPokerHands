@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 /**
- * Kata Poker Hand
+ * Manifest Solutions - Poker Hands Kata (Coding Dojo)
  * By: Joshua S. Garrett
- * 10/14/2022
+ * 10/16/2022
  */
 namespace KataPokerHands
 {
@@ -18,23 +18,20 @@ namespace KataPokerHands
                 "Black: 2H 4S 4C 2D 4H  White: 2S 8S AS QS 3S",     // Black wins. - with full house: 4 over 2
                 "Black: 2H 3D 5S 9C KD  White: 2C 3H 4S 8C KH",     // Black wins. - with high card: 9
                 "Black: 2H 3D 5S 9C KD  White: 2D 3H 5C 9S KH",     // Tie.
-
-                "Black: 2H 2D 5S 9C KD  White: 3D 3H 4C 4S KH",     // Pair and Two Pair
+                                                                    // [ADDITIONAL TEST INPUTS]
+                "Black: 2H 2D 5S 9C KD  White: 3D 3H 4C 4S KH",     // Pair and Two Pair 
                 "Black: 2H 2D 2S 9C KD  White: 3D 3H 3C 3S KH",     // Three and Four of a Kind
                 "Black: 2H 3D 4S 5C 6C  White: 2H 3H 5H 8H KH",     // Straight and Flush
-                "Black: 2H 3H 4H 5H 6H  White: 2D 2H 2C 3D 3H"      // Straight-Flush and Full House
+                "Black: 2H 3H 4H 5H 6H  White: 2D 2H 2C 3D 3H",     // Straight-Flush and Full House
+                "Black: 2H 3H 4H 5H 6H  White: 2H 3H 4H 5H 6H"      // Straight-Flush tie.
             };
-
-            InputController inputController = new InputController(sampleInputs[4]);
-            Game game = new Game(inputController);
-            Console.WriteLine(game.Players[0].Hand());
-            // GET PLAYER NAMES
-            //Console.WriteLine($"Total players {inputController.PlayerNames.Count}: {inputController.PlayerNames[0]}, {inputController.PlayerNames[1]}");
-            // GET CARD COUNT
-            //Console.WriteLine($"Total Cards in Cards list: {inputController.Cards.Count}");
-            //game.DisplayPlayers();
-            //game.Players.ForEach(p => p.DisplayHand());
-            //game.DisplayWinner();
+            for (int i = 0; i < sampleInputs.Length; i++)
+            {
+                InputController inputController = new InputController(sampleInputs[i]);
+                Game game = new Game(inputController);
+                game.DetermineWinner();
+            }
+            
             // END
             Console.ReadLine();
         }
