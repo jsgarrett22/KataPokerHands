@@ -29,131 +29,131 @@ public class Player
 		Console.WriteLine();
 	}
 
-    // Straight flush: 5 cards of the same suit with consecutive values.
+	// Straight flush: 5 cards of the same suit with consecutive values.
 	// Ranked by the highest card in the hand.
-    public bool HasStraightFlush()
-    {
+	public bool HasStraightFlush()
+	{
 		return (HasStraight() && HasFlush());
-    }
+	}
 
-    // Four of a kind: 4 cards with the same value.
+	// Four of a kind: 4 cards with the same value.
 	// Ranked by the value of the 4 cards.
-    public bool HasFourOfAkind()
-    {
-        List<Card> fours = new List<Card>();
-        for (int i = 0; i < this.Cards.Count; i++)
-        {
-            int currentValue = this.Cards[i].Value;
-            fours = this.Cards.FindAll(card => card.Value.Equals(currentValue));
-            if (fours.Count == 4)
-            {
-                WinningCard = fours[0];
-                return true;
-            }
-        }
-        return false;
-    }
+	public bool HasFourOfAkind()
+	{
+		List<Card> fours = new List<Card>();
+		for (int i = 0; i < this.Cards.Count; i++)
+		{
+			int currentValue = this.Cards[i].Value;
+			fours = this.Cards.FindAll(card => card.Value.Equals(currentValue));
+			if (fours.Count == 4)
+			{
+				WinningCard = fours[0];
+				return true;
+			}
+		}
+		return false;
+	}
 
-    // Full House: 3 cards of the same value, with the remaining 2 cards forming a pair.
+	// Full House: 3 cards of the same value, with the remaining 2 cards forming a pair.
 	// Ranked by the value of the 3 cards.
-    public bool HasFullHouse()
-    {
+	public bool HasFullHouse()
+	{
 		return (HasThreeOfAKind() && HasAPair());
-    }
+	}
 
-    // Flush: Hand contains 5 cards of the same suit.
+	// Flush: Hand contains 5 cards of the same suit.
 	// Hands which are both flushes are ranked using the rules for High Card.
-    public bool HasFlush()
+	public bool HasFlush()
 	{
 		List<Card> cards = new List<Card>();
 		cards = this.Cards.OrderBy(card => card.Value).ToList();
-        for (int i = 0; i < this.Cards.Count - 1; i++)
-        {
-            Card currentCard = cards[i];
-            Card nextCard = cards[i + 1];
-            if (currentCard.Suit != nextCard.Suit)
-            {
-                return false;       // a single false case ensures the user doesn't have a flush
-            }
-        }
-        cards = this.Cards.OrderByDescending(card => card.Value).ToList();
-        WinningCard = cards[0];
-        return true;
-    }
+		for (int i = 0; i < this.Cards.Count - 1; i++)
+		{
+			Card currentCard = cards[i];
+			Card nextCard = cards[i + 1];
+			if (currentCard.Suit != nextCard.Suit)
+			{
+				return false;       // a single false case ensures the user doesn't have a flush
+			}
+		}
+		cards = this.Cards.OrderByDescending(card => card.Value).ToList();
+		WinningCard = cards[0];
+		return true;
+	}
 
-    // Straight: Hand contains 5 cards with consecutive values.
+	// Straight: Hand contains 5 cards with consecutive values.
 	// Hands which both contain a straight are ranked by their highest card.
-    public bool HasStraight()
+	public bool HasStraight()
 	{
-        List<Card> cards = new List<Card>();
-        cards = this.Cards.OrderBy(card => card.Value).ToList();
-        for (int i = 0; i < this.Cards.Count - 1; i++)
-        {
-            Card currentCard = cards[i];
-            Card nextCard = cards[i + 1];
-            if (currentCard.Value + 1 != nextCard.Value)
-            {
-                return false;       // a single false case ensures the user doesn't have a straight
-            }
-        }
-        cards = this.Cards.OrderByDescending(card => card.Value).ToList();
-        WinningCard = cards[0];
+		List<Card> cards = new List<Card>();
+		cards = this.Cards.OrderBy(card => card.Value).ToList();
+		for (int i = 0; i < this.Cards.Count - 1; i++)
+		{
+			Card currentCard = cards[i];
+			Card nextCard = cards[i + 1];
+			if (currentCard.Value + 1 != nextCard.Value)
+			{
+				return false;       // a single false case ensures the user doesn't have a straight
+			}
+		}
+		cards = this.Cards.OrderByDescending(card => card.Value).ToList();
+		WinningCard = cards[0];
 		return true;
 	}
 
 	// Three of a Kind: Three of the cards in the hand have the same value.
 	// Hands which both contain three of a kind are ranked by the value of the 3 cards.
 	public bool HasThreeOfAKind()
-    {
+	{
 		List<Card> threes = new List<Card>();
 		for (int i = 0; i < this.Cards.Count; i++)
 		{
 			int currentValue = this.Cards[i].Value;
 			threes = this.Cards.FindAll(card => card.Value.Equals(currentValue));
-            if (threes.Count == 3)
-            {
-                WinningCard = threes[0];
-                return true;
-            }
-        }
+			if (threes.Count == 3)
+			{
+				WinningCard = threes[0];
+				return true;
+			}
+		}
 		return false;
-    }
+	}
 
-    // Two Pairs: The hand contains 2 different pairs.
+	// Two Pairs: The hand contains 2 different pairs.
 	// Hands which both contain 2 pairs are ranked by the value of their highest pair.
 	// Hands with the same highest pair are ranked by the value of their other pair.
 	// If these values are the same the hands are ranked by the value of the remaining card.
-    public bool HasTwoPair()
-    {
-        List<Card> pairs = new List<Card>();
-        List<Card> tmp = new List<Card>();
-        for (int i = 0; i < this.Cards.Count; i++)
-        {
-            int currentValue = this.Cards[i].Value;
-            tmp = this.Cards.FindAll(card => card.Value.Equals(currentValue));
-            if (tmp.Count == 2)
-            {
-                pairs.Add(this.Cards[i]);
-            }
-        }
-        if (pairs.Count == 4)
-        {
+	public bool HasTwoPair()
+	{
+		List<Card> pairs = new List<Card>();
+		List<Card> tmp = new List<Card>();
+		for (int i = 0; i < this.Cards.Count; i++)
+		{
+			int currentValue = this.Cards[i].Value;
+			tmp = this.Cards.FindAll(card => card.Value.Equals(currentValue));
+			if (tmp.Count == 2)
+			{
+				pairs.Add(this.Cards[i]);
+			}
+		}
+		if (pairs.Count == 4)
+		{
 			pairs = pairs.OrderByDescending(card => card.Value).ToList();
-            WinningCard = pairs[0];
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+			WinningCard = pairs[0];
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
-    // Pair: 2 of the 5 cards in the hand have the same value.
+	// Pair: 2 of the 5 cards in the hand have the same value.
 	// Hands which both contain a pair are ranked by the value of the cards forming the pair.
 	// If these values are the same, the hands are ranked by the values of the cards not forming the pair,
 	// in decreasing order.
-    public bool HasAPair()
-    {
+	public bool HasAPair()
+	{
 		// Check every card in the hand and compare if they have equal value.
 		// If we find at least 2 matches, then we have a pair and we can add
 		// to our matches. If matches only two matches were found, that'll
@@ -173,73 +173,87 @@ public class Player
 		{
 			WinningCard = pairs[0];
 			return true;
-		} else
+		}
+		else
 		{
 			return false;
 		}
-    }
+	}
 
 
-    // High Card: Hands which do not fit any higher category are ranked by the value of their highest card.
+	// High Card: Hands which do not fit any higher category are ranked by the value of their highest card.
 	// If the highest cards have the same value, the hands are ranked by the next highest, and so on.
 
-    // This is the method we will run on a player to determine the WinningCard given for the player
-    // and what kind of hand the player has given the cards. If it falls all the way down to the bottom,
-    // then the player's highest card is the winning card.
-    public string Hand()
+	// This is the method we will run on a player to determine the WinningCard given for the player
+	// and what kind of hand the player has given the cards. If it falls all the way down to the bottom,
+	// then the player's highest card is the winning card.
+	public string Hand()
 	{
 		if (HasStraightFlush())
 		{
 			return "straight flush";
-		} else if (HasFourOfAkind())
+		}
+		else if (HasFourOfAkind())
 		{
-            return "four of a kind";
-        } else if (HasFullHouse())
+			return "four of a kind";
+		}
+		else if (HasFullHouse())
 		{
 			return "full house";
-		} else if (HasFlush())
+		}
+		else if (HasFlush())
 		{
 			return "flush";
-		} else if (HasStraight())
+		}
+		else if (HasStraight())
 		{
 			return "straight";
-        } else if (HasThreeOfAKind())
+		}
+		else if (HasThreeOfAKind())
 		{
-            return "three of a kind";
-        } else if (HasTwoPair())
+			return "three of a kind";
+		}
+		else if (HasTwoPair())
 		{
 			return "two pair";
-		} else if (HasAPair())
+		}
+		else if (HasAPair())
 		{
 			return "a pair";
-		} else
+		}
+		else
 		{
-            this.Cards = Cards.OrderByDescending(card => card.Value).ToList();
-            WinningCard = Cards[0];
-            return $"high card";
-        }
+			this.Cards = Cards.OrderByDescending(card => card.Value).ToList();
+			WinningCard = Cards[0];
+			return $"high card";
+		}
 	}
 
-	
+
 	private string DetermineHighCard(Card card)
 	{
 		int value = card.Value;
 		if (value == 14)
 		{
 			return "Ace";
-		} else if (value == 13)
+		}
+		else if (value == 13)
 		{
 			return "King";
-		} else if (value == 12)
+		}
+		else if (value == 12)
 		{
 			return "Queen";
-		} else if (value == 11)
+		}
+		else if (value == 11)
 		{
 			return "Jack";
-		} else if (value == 10)
+		}
+		else if (value == 10)
 		{
 			return "10";
-		} else
+		}
+		else
 		{
 			return value.ToString();
 		}

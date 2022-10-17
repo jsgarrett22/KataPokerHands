@@ -96,7 +96,7 @@ namespace KataPokerHands
                     }
                     else
                     {
-                        values[i] = Convert.ToInt32(tmp[i].Substring(0,1));
+                        values[i] = Convert.ToInt32(tmp[i].Substring(0, 1));
                     }
                 }
             }

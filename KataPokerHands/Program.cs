@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 
 /**
  * Manifest Solutions - Poker Hands Kata (Coding Dojo)
@@ -23,15 +21,15 @@ namespace KataPokerHands
                 "Black: 2H 2D 2S 9C KD  White: 3D 3H 3C 3S KH",     // Three and Four of a Kind
                 "Black: 2H 3D 4S 5C 6C  White: 2H 3H 5H 8H KH",     // Straight and Flush
                 "Black: 2H 3H 4H 5H 6H  White: 2D 2H 2C 3D 3H",     // Straight-Flush and Full House
-                "Black: 2H 3H 4H 5H 6H  White: 2H 3H 4H 5H 6H"      // Straight-Flush tie.
+                "Black: 2H 3H 4H 5H 6H  White: 2H 3H 4H 5H 6H",     // Straight-Flush tie.
             };
-            for (int i = 0; i < sampleInputs.Length; i++)
+            for (int i = 4; i < 9; i++)
             {
                 InputController inputController = new InputController(sampleInputs[i]);
                 Game game = new Game(inputController);
                 game.DetermineWinner();
             }
-            
+
             // END
             Console.ReadLine();
         }
