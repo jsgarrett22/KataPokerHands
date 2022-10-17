@@ -53,16 +53,18 @@ public class Game
 	{
 		Player player1 = this.Players[0];
 		Player player2 = this.Players[1];
+		HandRank player1Rank = DeterminePlayerRank(player1.Hand());
+		HandRank player2Rank = DeterminePlayerRank(player2.Hand());
 
-		if (DeterminePlayerRank(player1.Hand()) > DeterminePlayerRank(player2.Hand()))
+		if (player1Rank > player2Rank)
 		{
 			Console.WriteLine($"{player1.Name} wins. - with {player1.Hand()}: {player1.WinningCard}");
 		}
-		else if (DeterminePlayerRank(player1.Hand()) < DeterminePlayerRank(player2.Hand()))
+		else if (player1Rank < player2Rank)
 		{
 			Console.WriteLine($"{player2.Name} wins. - with {player2.Hand()}: {player2.WinningCard}");
 		}
-		else if (DeterminePlayerRank(player1.Hand()) == DeterminePlayerRank(player2.Hand()))
+		else if (player1Rank == player2Rank)
 		{
 			DetermineEqualHandWinner(player1, player2);
 		}

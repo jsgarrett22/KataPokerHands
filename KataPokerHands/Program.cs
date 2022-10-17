@@ -23,13 +23,13 @@ namespace KataPokerHands
                 "Black: 2H 3H 4H 5H 6H  White: 2D 2H 2C 3D 3H",     // Straight-Flush and Full House
                 "Black: 2H 3H 4H 5H 6H  White: 2H 3H 4H 5H 6H",     // Straight-Flush tie.
             };
-            for (int i = 4; i < 9; i++)
+
+            for (int i = 0; i < sampleInputs.Length; i++)
             {
                 InputController inputController = new InputController(sampleInputs[i]);
                 Game game = new Game(inputController);
                 game.DetermineWinner();
             }
-
             // END
             Console.ReadLine();
         }
